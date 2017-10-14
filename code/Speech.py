@@ -17,7 +17,10 @@ class speech:
         with sr.Microphone() as source:
             audio = self.r.listen(source)
         try:
-            return self.r.recognize_google(audio)
+            if config.get('Bot','Google_Api')=="None":
+                return self.r.recognize_google(audio)
+            else:
+                return "Api needs to be added "
         except sr.UnknownValueError:
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
