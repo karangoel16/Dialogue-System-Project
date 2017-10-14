@@ -32,4 +32,12 @@ class Bot:
         return sent
 if __name__ == "__main__":
     bot = Bot()
-    bot.speak()
+    bot.speech.speak("hello how are you?")
+    while(True):
+        bot.speak()
+        bot.speech.speak("Would you like to exit or do something else?")
+        print("Would you like to exit or Continue?")
+        val=bot.speech.listen()
+        if "exit" in [i.lower() for i in nltk.word_tokenize(val)]:
+            bot.speech.speak("Thankyou! have a nice day")
+            break
