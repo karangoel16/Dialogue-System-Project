@@ -8,7 +8,7 @@ DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
 config.read(DirName+"/Config.ini");
 
-class speech:
+class Speech:
     def __init__(self):
          self.r = sr.Recognizer()
          self.engine = pyttsx3.init()
@@ -30,5 +30,5 @@ class speech:
         self.engine.runAndWait()
         
 if __name__ == "__main__":
-    speech=speech()
+    speech=Speech()
     speech.speak(speech.listen())
