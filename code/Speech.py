@@ -12,6 +12,7 @@ class speech:
     def __init__(self):
          self.r = sr.Recognizer()
          self.engine = pyttsx3.init()
+         self.engine.setProperty('rate',config.get('Bot','Voice_Rate'))
     def listen(self):
         with sr.Microphone() as source:
             audio = self.r.listen(source)
