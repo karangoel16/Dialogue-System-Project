@@ -1,6 +1,13 @@
 import speech_recognition as sr
 import pyttsx3 #we will use this to implment module to speak the text when needed
+import os
+import configparser
 from time import sleep
+
+DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+config = configparser.ConfigParser()
+config.read(DirName+"/Config.ini");
+
 class speech:
     def __init__(self):
          self.r = sr.Recognizer()
