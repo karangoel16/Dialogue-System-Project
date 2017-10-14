@@ -12,8 +12,8 @@ class Speech:
     def __init__(self):
          self.r = sr.Recognizer()
          self.engine = pyttsx3.init()
-         self.engine.setProperty('rate',config.get('Bot','Voice_Rate'))
     def listen(self):
+        print("hello")
         with sr.Microphone() as source:
             audio = self.r.listen(source)
         try:
@@ -26,6 +26,7 @@ class Speech:
         except sr.RequestError as e:
             print("Could not request result from Google Speech Recognition Service; {0}".format(e) )
     def speak(self,text):
+        self.engine.setProperty('rate',config.get('Bot','Voice_Rate'))
         self.engine.say(text)
         self.engine.runAndWait()
         
