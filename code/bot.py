@@ -14,7 +14,7 @@ class Bot:
     def speak(self):
         sent = self.speech.listen()
         if 'meaning' in sent:
-            print('yes')
+            print(nltk.pos_tags(nltk.word_tokenize(sent)))
         return sent
 if __name__ == "__main__":
     bot = Bot()
