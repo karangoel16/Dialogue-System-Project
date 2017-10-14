@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import pyttsx3 #we will use this to implment module to speak the text when needed
+from time import sleep
 class speech:
     def __init__(self):
          self.r = sr.Recognizer()
