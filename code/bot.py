@@ -5,9 +5,13 @@ import nltk
 from speech import Speech
 from universal import Universal
 from time import sleep
+from meaning import Meaning
+from synonym import Synonym
+from antonym import Antonym
 import lxml
 import webbrowser
 import apiai
+import nltk
 
 DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
@@ -22,20 +26,14 @@ class Bot:
         self.speech = Speech()
         self.dictionary = PyDictionary() 
         self.universal = Universal(self.speech)
-        
+        self.meaning = Meaning(self.speech)
+        self.synonym = Synonym(self.speech)
+        self.antonym = Antonym(self.speech)
     def speak(self):
         sent = self.speech.listen()
         print(sent)
         if 'meaning of' in sent:
-            for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
-                if i != "meaning" and i != "word":
-                    map=self.dictionary.meaning(i)
-                    for key in map:
-                        self.speech.speak("When "+ i +"used as "+key)
-                        #sleep(0.15)
-                        for j in map[key]:
-                            print(i+ ":"+ j)
-                            self.speech.speak(j)
+            self.meaning.Start_Meaning(sent)
         elif 'synonyms' in sent:
             for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
                 if i != "synonyms" and i != "word":
