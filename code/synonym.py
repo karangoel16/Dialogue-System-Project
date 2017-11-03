@@ -1,7 +1,11 @@
 import os
 import configparser
+from antonym import Antonym
+from meaning import Meaning
+from universal import Universal
+from PyDictionary import PyDictionary
 import nltk
-import 
+
 DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
 config.read(DirName+"/Config.ini");
@@ -10,3 +14,5 @@ config.read(DirName+"/Config.ini");
 class Synonym:
     def __init__(self,speech):
         self.speech=speech
+
+    def Start_Synonym(self):
