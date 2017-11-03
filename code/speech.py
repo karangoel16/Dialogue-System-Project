@@ -12,6 +12,7 @@ class Speech:
     def __init__(self):
          self.r = sr.Recognizer()
          self.engine = pyttsx3.init()
+
     def listen(self):
         with sr.Microphone() as source:
             audio = self.r.listen(source)
@@ -24,10 +25,14 @@ class Speech:
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
             print("Could not request result from Google Speech Recognition Service; {0}".format(e) )
+
     def speak(self,text):
         self.engine.setProperty('rate',int(config.get('Bot','Voice_Rate')))
+        #self.engine.setProperty('rate', 200)
+        self.engine.setProperty('voice', config.get('Speech','voice'))
         self.engine.say(text)
         self.engine.runAndWait()
+
         
 if __name__ == "__main__":
     speech=Speech()

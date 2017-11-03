@@ -13,7 +13,8 @@ config.read(DirName+"/Config.ini");
 class Bot:
     def __init__(self):
         self.speech = Speech()
-        self.dictionary = PyDictionary() 
+        self.dictionary = PyDictionary()
+
     def speak(self):
         sent = self.speech.listen()
         print(sent)
@@ -23,16 +24,33 @@ class Bot:
                     map=self.dictionary.meaning(i)
                     for key in map:
                         self.speech.speak("When "+ i +"used as "+key)
-                        sleep(0.15)
+                        #sleep(0.15)
                         for j in map[key]:
                             print(j)
                             self.speech.speak(j)
+        elif 'synonyms' in sent:
+            for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
+                if i != "synonyms" and i != "word":
+                    synList=self.dictionary.synonym(i)
+                    print(synList)
+                    if(len(synList)>0):
+                        self.speech.speak("Other word for" + i + "are")
+                        for j in synList:
+                            print(j)
+                            self.speech.speak(j)
+                    else:
+                        self.speech.speak("I am sorry . I don't know this word")
+
+        
         else:
             self.speech.speak("Invalid Response how can I help you")
         return sent
 if __name__ == "__main__":
     bot = Bot()
-    bot.speech.speak("hello how are you?")
+
+    #speech.speak("hi, How are you doing")
+    # sleep(0.15)
+    bot.speech.speak("hi, How are you doing")
     while(True):
         bot.speak()
         bot.speech.speak("Would you like to exit or do something else?")
