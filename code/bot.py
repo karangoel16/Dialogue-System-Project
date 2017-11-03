@@ -48,6 +48,19 @@ class Bot:
                             self.speech.speak(j)
                     else:
                         self.speech.speak("I am sorry . I don't know this word")
+        elif 'antonyms' in sent:
+            for i in [key for key, val in nltk.pos_tag(nltk.word_tokenize(sent)) if val == "NN"]:
+                if i != "synonyms" and i != "word":
+                    synList = self.dictionary.antonym(i)
+                    print(synList)
+                    if (len(synList) > 0):
+                        self.speech.speak("Antonyms of" + i + "are")
+                        for j in synList:
+                            print(j)
+                            self.speech.speak(j)
+                    else:
+                        self.speech.speak("I am sorry . I don't know this word")
+
         else:
             self.universal.check(sent)
             self.speech.speak("Invalid Response how can I help you")
