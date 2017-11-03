@@ -1,6 +1,5 @@
 import os
 import configparser
-from synonym import Synonym
 from universal import Universal
 from PyDictionary import PyDictionary
 import nltk
@@ -15,7 +14,6 @@ config.read(DirName+"/Config.ini");
 class Meaning:
     def __init__(self,speech):
         self.speech=speech
-        self.synonym = Synonym(self.speech)
         self.universal = Universal(self.speech)
         self.dictionary = PyDictionary() 
         
@@ -23,11 +21,14 @@ class Meaning:
     def Start_Meaning(self,sent):
         for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
             if i != "meaning" and i != "word":
-                map=self.dictionary.meaning(i)
-                for key in map:
-                    self.speech.speak("When "+ i +"used as "+key)
-            #sleep(0.15)
-                    for j in map[key]:
-                        print(i+ ":"+ j)
-                        self.speech.speak(j)
+                self.Word_Meaning(i)
         #Need to add synonym of the word function from here
+    def Word_Meaning(self,word):
+        map=self.dictionary.meaning(word)
+        for key in map:
+            self.speech.speak("When "+ word +"used as "+key)
+            #sleep(0.15)
+            for j in map[key]:
+                print(word+ ":"+ j)
+                self.speech.speak(j)
+        

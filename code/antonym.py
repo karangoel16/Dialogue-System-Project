@@ -1,6 +1,5 @@
 import os
 import configparser
-from synonym import Synonym
 from universal import Universal
 from PyDictionary import PyDictionary
 import nltk
@@ -13,5 +12,3 @@ class Antonym:
     def __init__(self,speech):
         self.speech = speech
         self.universal = Universal(speech)
-        self.meaning = Meaning(speech)
-        self.synonym = Synonym(speech)
