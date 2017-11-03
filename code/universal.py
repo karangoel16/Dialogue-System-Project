@@ -13,8 +13,8 @@ class Universal:
 
         """
         if(self.exit(text)):
-            return "exit"
-        return None
+            return True
+        return False
     def exit(self,text):
         """
             here the text is the sentence which we will get from the main bot module we will need to see

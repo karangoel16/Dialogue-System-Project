@@ -22,6 +22,9 @@ class Meaning:
         for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
             if i != "meaning" and i != "word":
                 self.Word_Meaning(i)
+                self.speech.speak("Would you like to know about the antonym?")
+                sent1=self.speech.listen()
+
         #Need to add synonym of the word function from here
     def Word_Meaning(self,word):
         map=self.dictionary.meaning(word)

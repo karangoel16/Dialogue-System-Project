@@ -40,8 +40,8 @@ class Bot:
         elif 'antonyms' in sent:
             self.antonym.Start_Antonym(sent)
         else:
-            self.universal.check(sent)
-            self.speech.speak("Invalid Response how can I help you")
+            if(self.universal.check(sent) == False):
+                self.speech.speak("Invalid Response how can I help you")
         return sent
 if __name__ == "__main__":
     bot = Bot()
