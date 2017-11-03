@@ -11,12 +11,13 @@ config.read(DirName+"/Config.ini");
 class Synonym:
     def __init__(self,speech):
         self.speech=speech
+        self.dictionary = PyDictionary()
 
     def Start_Synonym(self,sent):
         for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
             if i != "synonyms" and i != "word":
-                self.Word_Meaning(i)
-    def Word_Synonym(self,word)
+                self.Word_Synonym(i)
+    def Word_Synonym(self,word) :
         synList=self.dictionary.synonym(word)
         print(synList)
         if(len(synList)>0):

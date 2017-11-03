@@ -14,8 +14,10 @@ class Antonym:
         self.universal = Universal(self.speech)
         self.dictionary = PyDictionary() 
     def Start_Antonym(self,sent):
+        print("I am start antonyms1")
         for i in [key for key, val in nltk.pos_tag(nltk.word_tokenize(sent)) if val == "NN"]:
-        if i != "synonyms" and i != "word":
+          if i != "antonyms" and i != "word":
+            print("I am start antonyms")
             self.Word_Antonym(i)
     def Word_Antonym(self,word):
         antList = self.dictionary.antonym(word)

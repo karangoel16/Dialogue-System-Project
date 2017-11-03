@@ -13,7 +13,7 @@ class Speech:
          self.r = sr.Recognizer()
          with sr.Microphone() as source:
             self.r.adjust_for_ambient_noise(source)
-         self.engine = pyttsx3.init('espeak')
+         self.engine = pyttsx3.init()
     def listen(self):
         with sr.Microphone() as source:
             #self.r.adjust_for_ambient_noise(source)
