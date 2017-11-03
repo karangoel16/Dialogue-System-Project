@@ -11,9 +11,12 @@ config.read(DirName+"/Config.ini");
 class Speech:
     def __init__(self):
          self.r = sr.Recognizer()
-         self.engine = pyttsx3.init()
+         with sr.Microphone() as source:
+            self.r.adjust_for_ambient_noise(source)
+         self.engine = pyttsx3.init('espeak')
     def listen(self):
         with sr.Microphone() as source:
+            #self.r.adjust_for_ambient_noise(source)
             audio = self.r.listen(source)
         try:
             if config.get('Bot','Google_Api')=="None":

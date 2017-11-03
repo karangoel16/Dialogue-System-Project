@@ -1,3 +1,5 @@
 nltk
 speech_recognizer
 pyttx3
+configparser
+os

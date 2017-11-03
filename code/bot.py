@@ -3,21 +3,28 @@ import os
 from PyDictionary import PyDictionary
 import nltk
 from speech import Speech
+from universal import Universal
 from time import sleep
 import lxml
-
+import webbrowser
 DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
 config.read(DirName+"/Config.ini");
 
 class Bot:
     def __init__(self):
+        """
+            here the main speech module is speech which is in the file
+            here the dictionary modusle is PyDictionary which will be using 
+        """
         self.speech = Speech()
         self.dictionary = PyDictionary() 
+        self.universal = Universal(self.speech)
+        
     def speak(self):
         sent = self.speech.listen()
         print(sent)
-        if 'meaning' in sent:
+        if 'meaning of' in sent:
             for i in [key for key,val in nltk.pos_tag(nltk.word_tokenize(sent)) if val== "NN"]:
                 if i != "meaning" and i != "word":
                     map=self.dictionary.meaning(i)
@@ -25,19 +32,20 @@ class Bot:
                         self.speech.speak("When "+ i +"used as "+key)
                         sleep(0.15)
                         for j in map[key]:
-                            print(j)
+                            print(i+ ":"+ j)
                             self.speech.speak(j)
+                            sleep(0.15)
         else:
+            self.universal.check(sent)
             self.speech.speak("Invalid Response how can I help you")
         return sent
 if __name__ == "__main__":
     bot = Bot()
-    bot.speech.speak("hello how are you?")
+    bot.speech.speak("hello how are you? I am wordie your personnel dictionary to know more abour words and learn about it")
     while(True):
-        bot.speak()
-        bot.speech.speak("Would you like to exit or do something else?")
-        print("Would you like to exit or Continue?")
-        val=bot.speech.listen()
-        if "exit" in [i.lower() for i in nltk.word_tokenize(val)]:
-            bot.speech.speak("Thankyou! have a nice day")
+        key=input("Ready to continue? Yes/No")
+        if(key=="Yes"):
+            bot.speak()
+        if(key=="No"):
             break
+    webbrowser.open("https://goo.gl/forms/iAhwQjjpAB1iMzEZ2")
