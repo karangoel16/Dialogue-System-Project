@@ -7,6 +7,8 @@ from universal import Universal
 from time import sleep
 import lxml
 import webbrowser
+import apiai
+
 DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
 config.read(DirName+"/Config.ini");
@@ -46,8 +48,6 @@ class Bot:
                             self.speech.speak(j)
                     else:
                         self.speech.speak("I am sorry . I don't know this word")
-
-        
         else:
             self.universal.check(sent)
             self.speech.speak("Invalid Response how can I help you")

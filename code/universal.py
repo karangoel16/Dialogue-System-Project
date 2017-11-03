@@ -12,8 +12,9 @@ class Universal:
             This is the main check module which will keep the identity of universal function to be used 
 
         """
-        self.exit(text)
-        return False
+        if(self.exit(text)):
+            return "exit"
+        return None
     def exit(self,text):
         """
             here the text is the sentence which we will get from the main bot module we will need to see
@@ -22,7 +23,9 @@ class Universal:
         print("We are in exit module now")
         print("exit" in text)
         if "exit" in text:
-            self.speech.speak("Do you want to exit, Please press Yes in 10 sec")     
+            self.speech.speak("Do you want to exit, Please press Yes in 10 sec") 
+            return True
+        return False    
         
         
     
