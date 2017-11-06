@@ -9,7 +9,7 @@ import lxml
 DirName='/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
 config = configparser.ConfigParser()
 config.read(DirName+"/Config.ini");
-
+#test by himanshu 
 class Bot:
     def __init__(self):
         self.speech = Speech()
